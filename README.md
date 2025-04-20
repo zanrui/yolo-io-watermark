@@ -1,6 +1,6 @@
-## 品牌logo的水印检测demo
+## 小红书logo的水印检测demo
 
-本demo使用`labelImg`对`26`张样本图片的水印位置进行标注，[ultralytics-YOLO8](https://github.com/ultralytics/ultralytics)对水印位置进行模型训练&检测。
+本demo使用`labelImg`对`24`张样本图片的水印位置进行标注，[ultralytics-YOLO8](https://github.com/ultralytics/ultralytics)对水印位置进行模型训练&检测。
 
 如果需要使用 [ultralytics-YOLO8](https://github.com/ultralytics/ultralytics) + [IOPaint](https://github.com/Sanster/IOPaint) 进行组合，自动移除yolo识别的目标水印，请点击[yolo8-plus-iopaint](https://github.com/Samge0/yolo8-plus-iopaint)仓库查看。
 
@@ -19,6 +19,11 @@ labelImg==1.8.6
 
 ### 环境配置
 - 【推荐】使用vscode的`Dev Containers`模式，参考[.devcontainer/README.md](.devcontainer/README.md)
+
+    复制并根据实际情况调整`Dev Containers`插件的容器编排配置，需要关注的主要是`/root/.cache`的路径映射、是否配置代理`PROXY`
+    ```shell
+    cp .devcontainer/docker-compose-demo.yml .devcontainer/docker-compose.yml
+    ```
 
 - 【可选】其他虚拟环境方式
     - 【二选一】安装torch-cpu版
@@ -68,7 +73,12 @@ python test.py
 
 ### 相关截图
 - labelImg标注界面
-![labelImg](https://github.com/Samge0/yolo8-watermark-brand/assets/17336101/c8f9ac72-09f0-4bf7-93f5-e0aa0b20e7ef)
+![image](https://github.com/Samge0/yolo8-watermark-xhs/assets/17336101/1e1c64f6-5049-4e43-aeb7-5cfedd305bee)
 
 - 训练后的模型预测结果
-![output-result](https://github.com/Samge0/yolo8-watermark-brand/assets/17336101/ccdccdc0-8683-499d-bd2b-27948a0fa4f3)
+![image](https://github.com/Samge0/yolo8-watermark-xhs/assets/17336101/6eaf4f70-f1a9-4605-8f9a-7ecf7abba921)
+
+|img1|img2|
+|:--------:|:--------:|
+|![test](https://github.com/Samge0/yolo8-watermark-xhs/assets/17336101/04fdd1d9-6055-4774-a973-e11882a75b15)|![tmp9zby3ksb](https://github.com/Samge0/yolo8-watermark-xhs/assets/17336101/db2d1deb-00e8-4c89-bdc9-72fdfb1fb658)|
+|![tmp2046ojfe](https://github.com/Samge0/yolo8-watermark-xhs/assets/17336101/8a33950c-5ee3-49f5-91f5-38a3c2e7b32c)|![tmpyv0z5qty](https://github.com/Samge0/yolo8-watermark-xhs/assets/17336101/288efd14-7cc2-4a2d-86a5-a825d8e9a02d)|

@@ -7,6 +7,15 @@ import os
 import random
 import shutil
 
+
+def is_img_file(f) -> bool:
+    return f.endswith('.png') or f.endswith('.jpg')
+
+
+def replace2txt(f) -> str:
+    return f.replace('.png', '.txt').replace('.jpg', '.txt')
+
+
 def split_dataset(data_dir,train_val_test_dir, train_ratio, val_ratio, test_ratio):
     # 创建目标文件夹
     train_dir = os.path.join(train_val_test_dir, 'train')
@@ -20,7 +29,7 @@ def split_dataset(data_dir,train_val_test_dir, train_ratio, val_ratio, test_rati
     files = os.listdir(data_dir)
 
     # 过滤掉非图片文件
-    image_files = [f for f in files if f.endswith('.png')]
+    image_files = [f for f in files if is_img_file(f)]
     # 随机打乱文件列表
     random.shuffle(image_files)
 
@@ -34,9 +43,9 @@ def split_dataset(data_dir,train_val_test_dir, train_ratio, val_ratio, test_rati
     train_files = image_files[:num_train]
     for file in train_files:
         src_image_path = os.path.join(data_dir, file)
-        src_label_path = os.path.join(data_dir, file.replace('.png', '.txt').replace('.png', '.txt'))
+        src_label_path = os.path.join(data_dir, replace2txt(file))
         dst_image_path = os.path.join(train_dir, file)
-        dst_label_path = os.path.join(train_dir, file.replace('.png', '.txt').replace('.png', '.txt'))
+        dst_label_path = os.path.join(train_dir, replace2txt(file))
         shutil.copy(src_image_path, dst_image_path)
         shutil.copy(src_label_path, dst_label_path)
 
@@ -44,9 +53,9 @@ def split_dataset(data_dir,train_val_test_dir, train_ratio, val_ratio, test_rati
     val_files = image_files[num_train:num_train+num_val]
     for file in val_files:
         src_image_path = os.path.join(data_dir, file)
-        src_label_path = os.path.join(data_dir, file.replace('.png', '.txt').replace('.png', '.txt'))
+        src_label_path = os.path.join(data_dir, replace2txt(file))
         dst_image_path = os.path.join(val_dir, file)
-        dst_label_path = os.path.join(val_dir, file.replace('.png', '.txt').replace('.png', '.txt'))
+        dst_label_path = os.path.join(val_dir, replace2txt(file))
         shutil.copy(src_image_path, dst_image_path)
         shutil.copy(src_label_path, dst_label_path)
 
@@ -54,9 +63,9 @@ def split_dataset(data_dir,train_val_test_dir, train_ratio, val_ratio, test_rati
     test_files = image_files[num_train+num_val:]
     for file in test_files:
         src_image_path = os.path.join(data_dir, file)
-        src_label_path = os.path.join(data_dir, file.replace('.png', '.txt').replace('.png', '.txt'))
+        src_label_path = os.path.join(data_dir, replace2txt(file))
         dst_image_path = os.path.join(test_dir, file)
-        dst_label_path = os.path.join(test_dir, file.replace('.png', '.txt').replace('.png', '.txt'))
+        dst_label_path = os.path.join(test_dir, replace2txt(file))
         shutil.copy(src_image_path, dst_image_path)
         shutil.copy(src_label_path, dst_label_path)
 
@@ -76,7 +85,7 @@ def move_files(data_dir):
     files = os.listdir(data_dir)
 
     # 移动PNG文件到images文件夹
-    png_files = [f for f in files if f.endswith('.png')]
+    png_files = [f for f in files if is_img_file(f)]
     for file in png_files:
         src_path = os.path.join(data_dir, file)
         dst_path = os.path.join(images_dir, file)

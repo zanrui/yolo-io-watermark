@@ -9,7 +9,7 @@ import os, time
 
 # Run inference
 def _inference(input_path: str, output_path: str):
-    results = model(input_path, conf=0.75)  # filter values with confidence level > 0.75
+    results = model(input_path, conf=0.5)  # filter values with confidence level > 0.xx
     # Show the results
     for r in results:
         im_array = r.plot(boxes=r.boxes)  # plot a BGR numpy array of predictions
@@ -43,8 +43,8 @@ def _print_date_info(tag: str, start_date):
 if __name__ == "__main__":
     # Load model
     start_date = time.time()
-    model_path = "runs/detect/train/weights/last.pt"    # customize the trained model, you need to execute `python training py` to get it first
-    # model_path = "result-weights/last.pt"     # with the demo model submitted by this branch, it can be run directly
+    model_path = "runs/detect/train/weights/best.pt"    # customize the trained model, you need to execute `python training py` to get it first
+    # model_path = "result-weights/best.pt"     # with the demo model submitted by this branch, it can be run directly
     print(f"Load model: {model_path}")
     model = YOLO(model_path)
     _print_date_info(f"Load model: {model_path} success, time consuming", start_date)
@@ -53,7 +53,7 @@ if __name__ == "__main__":
     os.makedirs(output_dir, exist_ok=True)
 
     # inference one
-    _inference("test.png", f"{output_dir}/test.png")
+    _inference("test.jpg", f"{output_dir}/test.jpg")
 
     # inference batch
     batch_dir = "datasets/data/val/images"
